@@ -8,6 +8,8 @@ import axios from "axios";
 
 import { saveToSecureStore } from "../services/hooks.js";
 
+import { GET_JWT_TOKEN } from "../services/api_links";
+
 const apiUrl = Constants.expoConfig.apiUrl;
 
 export const checkAuthenticationState = () => (dispatch) => {
@@ -29,53 +31,45 @@ export const checkAuthenticationState = () => (dispatch) => {
 
 export const signin = (username, password) => {
   //console.log(`${username} & ${password} & ${apiUrl}/authn/login`);
+  const header = {
+    accept: "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+
   return (dispatch) => {
-    const loginData = `user=${encodeURIComponent(username)}&password=${password}`;
+    const loginData = `username=${encodeURIComponent(
+      username
+    )}&password=${password}`;
     //console.log(loginData);
 
-    fetch(apiUrl + "/authn/login", {
+    fetch(apiUrl + GET_JWT_TOKEN, {
       method: "POST",
+      headers: header,
       body: loginData,
     })
       .then((resp) => {
         //console.log(JSON.stringify(resp, null, "\t"));
-        const dspaceXSRFToken = resp.headers.map["dspace-xsrf-token"];
-        //const dspaceXSRFCookie = resp.headers.map["set-cookie"];
-        //const xsrfCookieRegex =
-        //  /DSPACE-XSRF-COOKIE\=([0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12})/;
-        //const xsrfCookieMatch = dspaceXSRFCookie.match(xsrfCookieRegex);
-        // It seems both values are always equal, so I will return just one.
-        return dspaceXSRFToken;
+        if (resp.ok) {
+          return resp.json();
+        } else {
+          return { token_type: false };
+        }
       })
-      .then((token) => {
-        const newHeader = {
-          "X-XSRF-TOKEN": token,
-          //"Cookie": "DSPACE-XSRF-COOKIE=" + token,
-        };
-
-        fetch(apiUrl + "/authn/login", {
-          method: "POST",
-          headers: newHeader,
-          body: loginData,
-        })
-          .then((response) => {
-            //console.log(JSON.stringify(response, null, "\t"));
-            return response;
-          })
-          .then((data) => {
-            //console.log(JSON.stringify(data, null, "\t"));
-            if (data.ok) {
-              const authToken = data.headers.map.authorization;
-              console.log(authToken);
-              saveToSecureStore("authToken", authToken);
-              dispatch({ type: SET_AUTHENTICATED, payload: data });
-            } else {
-              console.log("Authentication failed.");
-              dispatch({ type: SET_UNAUTHENTICATED });
-            }
-          })
-          .catch((error) => console.log(error));
-      });
+      .then((data) => {
+        console.log(data)
+        if (data.token_type) {
+          const authToken = data.access_token;
+          const tokenType = data.token_type;
+          console.log(authToken);
+          saveToSecureStore("authToken", authToken);
+          saveToSecureStore("tokenType", tokenType);
+          dispatch({ type: SET_AUTHENTICATED, payload: data });
+        } else {
+          console.log("Authentication failed.");
+          dispatch({ type: SET_UNAUTHENTICATED });
+        }
+      })
+      .catch((error) => console.log(error));
   };
 };
 

@@ -28,32 +28,44 @@ const SignIn = (props) => {
   const formUpdate = (formData) => {};
 
   return (
-    <View>
-      <Text style={styles.txt}>Authentication</Text>
-      <PaperTextInput
-        label="Username"
-        value={username}
-        onChangeText={(value) => setUsername(value)}
-        autoCapitalize="none"
-        placeholder={"Enter username or e-mail"}
-        style={styles.fieldStyle}
-      />
-      <PaperTextInput
-        label="Password"
-        value={password}
-        onChangeText={(value) => setPassword(value)}
-        placeholder={"Enter your password"}
-        secureTextEntry
-        autoCapitalize="none"
-        right={<PaperTextInput.Icon icon="eye" />}
-        style={styles.fieldStyle}
-      />
-      <Button
-        title="Sign In"
-        onPress={() => {
-          props.signin(username, password);
-        }}
-      />
+    <View style={styles.container}>
+      <View style={styles.title}>
+        <Text style={styles.txt}>Ugly</Text>
+      </View>
+      <View>
+        <PaperTextInput
+          label="Username"
+          value={username}
+          onChangeText={(value) => setUsername(value)}
+          autoCapitalize="none"
+          placeholder={"Enter username or e-mail"}
+          style={styles.fieldStyle}
+        />
+        <PaperTextInput
+          label="Password"
+          value={password}
+          onChangeText={(value) => setPassword(value)}
+          placeholder={"Enter your password"}
+          secureTextEntry
+          autoCapitalize="none"
+          right={<PaperTextInput.Icon icon="eye" />}
+          style={styles.fieldStyle}
+        />
+        <View style={styles.links}>
+          <Button
+            title="Sign In"
+            onPress={() => {
+              props.signin(username, password);
+            }}
+          />
+          <Button
+            title="Register"
+            onPress={() => {
+              props.signin(username, password);
+            }}
+          />
+        </View>
+      </View>
     </View>
   );
 };
@@ -68,6 +80,15 @@ export default connect(mapStateToProps, actions)(SignIn);
 
 const makeStyles = (colors: any) =>
   StyleSheet.create({
+    container: {
+      width: 300,
+    },
+
+    title: {
+      justifyContent: "center",
+      alignItems: "center",
+    },
+
     txt: {
       color: colors.primary,
       fontSize: 50,
@@ -78,5 +99,11 @@ const makeStyles = (colors: any) =>
       height: 50,
       borderRadius: 5,
       backgroundColor: colors.onPrimary,
+    },
+
+    links: {
+      marginTop: 15,
+      flexDirection: "row",
+      justifyContent: "space-around",
     },
   });
