@@ -85,6 +85,6 @@ const styles = StyleSheet.create({
   },
 
   tweetsView: {
-    marginTop: 40,
+    marginTop: 10,
   },
 });

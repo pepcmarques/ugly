@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 
-import { TextInput as PaperTextInput } from "react-native-paper";
+import {
+  TextInput as PaperTextInput,
+  Button as PaperButton,
+} from "react-native-paper";
 
 import { useTheme } from "react-native-paper";
 
@@ -67,18 +70,24 @@ const SignIn = (props) => {
           style={styles.fieldStyle}
         />
         <View style={styles.links}>
-          <Button
-            title="Sign In"
+          <PaperButton
+            buttonColor={colors.onPrimary}
+            textColor={colors.primary}
+            mode="contained"
             onPress={() => {
               props.signin(username, password);
-            }}
-          />
-          <Button
-            title="Register"
+            }}>
+            Sign In
+          </PaperButton>
+          <PaperButton
+            buttonColor={colors.onPrimary}
+            textColor={colors.primary}
+            mode="contained"
             onPress={() => {
               props.signin(username, password);
-            }}
-          />
+            }}>
+            Register
+          </PaperButton>
         </View>
       </View>
     </View>
@@ -105,7 +114,7 @@ const makeStyles = (colors: any) =>
     },
 
     txt: {
-      color: colors.primary,
+      color: colors.onPrimary,
       fontSize: 50,
     },
 
@@ -121,4 +130,5 @@ const makeStyles = (colors: any) =>
       flexDirection: "row",
       justifyContent: "space-around",
     },
+
   });

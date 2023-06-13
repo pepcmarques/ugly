@@ -110,12 +110,12 @@ const darkMainColors = {
 
 const lightTheme = {
   ...MD3LightTheme,
-  ...lightMainColors,
+  //...lightMainColors,
 };
 
 const darkTheme = {
   ...MD3DarkTheme,
-  ...darkMainColors,
+  //...darkMainColors,
 };
 
 import { Provider as ReduxProvider } from "react-redux";
@@ -129,6 +129,9 @@ import store from "../src/store/store";
 export default function App() {
   const colorScheme = useColorScheme();
   const theme = colorScheme == "dark" ? darkTheme : lightTheme;
+
+  const { colors } = theme;
+  const styles = makeStyles(colors);
 
   const navigation = useRouter();
 
@@ -144,11 +147,12 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#def",
-  },
-});
+const makeStyles = (colors: any) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: colors.primary,
+    },
+  });

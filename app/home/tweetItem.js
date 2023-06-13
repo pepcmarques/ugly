@@ -45,8 +45,8 @@ function TweetItem(props) {
             <Link
               style={styles.link}
               href={{
-                pathname: "/home/tweetList", // TODO: Change route
-                params: { user_id: tweet.user_id },
+                pathname: `/home/${tweet.owner.username}`, // TODO: Change route
+                params: { username: tweet.owner.username },
               }}
             >
               {tweet.owner.username}
