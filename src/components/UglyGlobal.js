@@ -18,7 +18,7 @@ import { checkAuthenticationState } from "../store/actions";
 
 import { Link, Redirect } from "expo-router";
 
-const MobileRepository = (props) => {
+const UglyGlobal = (props) => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
   const dispatch = useDispatch();
 
@@ -29,8 +29,8 @@ const MobileRepository = (props) => {
   if (isAuthenticated) {
     // Render the main app
     // TODO: Create main APP
-   return <SignOut />;
-    //return <Redirect href="/home" />;
+    //return <SignOut />;
+    return <Redirect href="/home/tweetList" />;
   } else {
     // Render the authentication screens
     return <SignIn />;
@@ -44,5 +44,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { checkAuthenticationState })(
-  MobileRepository
+  UglyGlobal
 );

@@ -122,7 +122,7 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import { useRouter } from "expo-router";
 
-import MobileRepository from "../src/components/MobRepo";
+import UglyGlobal from "../src/components/UglyGlobal";
 
 import store from "../src/store/store";
 
@@ -137,7 +137,7 @@ export default function App() {
       <ReduxProvider store={store}>
         <SafeAreaView style={styles.container}>
           <StatusBar style="light" />
-          <MobileRepository />
+          <UglyGlobal />
         </SafeAreaView>
       </ReduxProvider>
     </PaperProvider>

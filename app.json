@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "BOILERPLATE",
-    "scheme": "boilerplate",
-    "slug": "boilerplate",
+    "name": "Ugly",
+    "scheme": "ugly",
+    "slug": "ugly",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

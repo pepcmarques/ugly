@@ -22,6 +22,8 @@ const SignIn = (props) => {
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+  const [secure, setSecure] = useState(true);
+  const [eye, setEye] = useState("eye");
 
   const token_id = shortid.generate();
 
@@ -46,9 +48,22 @@ const SignIn = (props) => {
           value={password}
           onChangeText={(value) => setPassword(value)}
           placeholder={"Enter your password"}
-          secureTextEntry
+          secureTextEntry={secure}
           autoCapitalize="none"
-          right={<PaperTextInput.Icon icon="eye" />}
+          right={
+            <PaperTextInput.Icon
+              icon={eye}
+              onPress={() => {
+                setSecure(!secure);
+                if (eye == "eye") {
+                  setEye("eye-off");
+                } else {
+                  setEye("eye");
+                }
+                return false;
+              }}
+            />
+          }
           style={styles.fieldStyle}
         />
         <View style={styles.links}>

@@ -18,6 +18,7 @@ export const checkAuthenticationState = () => (dispatch) => {
       if (storedToken) {
         // Validate token here or make an API call to validate it
         // If valid, dispatch SET_AUTHENTICATED
+        // TODO: SET_AUTHENTICAED should pass `data`
         dispatch({ type: SET_AUTHENTICATED });
         // If not valid, dispatch SET_UNAUTHENTICATED
       } else {
@@ -61,6 +62,7 @@ export const signin = (username, password) => {
           const authToken = data.access_token;
           const tokenType = data.token_type;
           console.log(authToken);
+          // console.log(tokenType);
           saveToSecureStore("authToken", authToken);
           saveToSecureStore("tokenType", tokenType);
           dispatch({ type: SET_AUTHENTICATED, payload: data });
