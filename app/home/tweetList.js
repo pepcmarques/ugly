@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 
 import Constants from "expo-constants";
 
+import { useTheme } from "react-native-paper";
+
 import { getAuthorizationString } from "../../src/services/hooks";
 
 import TweetItem from "./tweetItem";
@@ -19,6 +21,9 @@ const apiUrl = Constants.expoConfig.apiUrl;
 const TweetList = () => {
   const [loading, setLoading] = useState(true);
   const [tweets, setTweets] = useState([]);
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const fetchTweets = async () => {
     const authString = await getAuthorizationString();
@@ -77,14 +82,15 @@ const TweetList = () => {
 
 export default TweetList;
 
-const styles = StyleSheet.create({
-  waiting: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+const makeStyles = (colors: any) =>
+  StyleSheet.create({
+    waiting: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+    },
 
-  tweetsView: {
-    marginTop: 10,
-  },
-});
+    tweetsView: {
+      marginTop: 10,
+    },
+  });

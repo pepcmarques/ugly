@@ -19,3 +19,9 @@ This is a boilerplate for react-native applications. It uses: expo, react-native
 ## Theming
 
 https://callstack.github.io/react-native-paper/docs/guides/theming/
+https://expo.github.io/router/docs/migration/react-navigation/themes/
+
+## expo-router
+
+https://galaxies.dev/react-native-file-based-routing
+https://expo.github.io/router/docs/features/linking/

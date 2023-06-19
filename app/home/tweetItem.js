@@ -4,11 +4,16 @@ import { View, TouchableOpacity, Text, Image, StyleSheet } from "react-native";
 // ExpoIcons: https://icons.expo.fyi
 import { FontAwesome } from "@expo/vector-icons";
 
+import { useTheme } from "react-native-paper";
+
 import { useRouter, Link } from "expo-router";
 
 function TweetItem(props) {
   const router = useRouter();
   const tweet = props.tweet;
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   console.log(tweet);
 
@@ -46,14 +51,14 @@ function TweetItem(props) {
               style={styles.link}
               href={{
                 pathname: `/home/${tweet.owner.username}`, // TODO: Change route
-                params: { username: tweet.owner.username },
+                params: { username: tweet.owner.username, user_id: tweet.user_id },
               }}
             >
               {tweet.owner.username}
             </Link>
           </View>
           <View style={{ flexDirection: "row" }}>
-          <Text>comments: </Text>
+            <Text>comments: </Text>
             <Link
               style={styles.link}
               href={{
@@ -72,52 +77,53 @@ function TweetItem(props) {
 
 export default TweetItem;
 
-const styles = StyleSheet.create({
-  tweet: {
-    marginHorizontal: 12,
-    marginTop: 12,
-  },
+const makeStyles = (colors: any) =>
+  StyleSheet.create({
+    tweet: {
+      marginHorizontal: 12,
+      marginTop: 12,
+    },
 
-  card: {
-    backgroundColor: "#fff",
-    borderColor: "#bbb",
-    borderWidth: 1,
-    borderTopWidth: 0,
-  },
+    card: {
+      backgroundColor: "#fff",
+      borderColor: "#bbb",
+      borderWidth: 1,
+      borderTopWidth: 0,
+    },
 
-  info: {
-    flexDirection: "row",
-    padding: 10,
-  },
+    info: {
+      flexDirection: "row",
+      padding: 10,
+    },
 
-  title: {
-    flex: 1,
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 5,
-  },
+    title: {
+      flex: 1,
+      fontSize: 16,
+      fontWeight: "bold",
+      marginBottom: 5,
+    },
 
-  links: {
-    flexDirection: "row",
-    marginHorizontal: 12,
-    justifyContent: "space-between",
-  },
+    links: {
+      flexDirection: "row",
+      marginHorizontal: 12,
+      justifyContent: "space-between",
+    },
 
-  link: {
-    color: "blue",
-  },
+    link: {
+      color: colors.primary,
+      fontWeight: "bold",
+    },
 
-  likes: {
-    flexDirection: "row",
-    justifyContent: "center",
-    //alignItems: "center",
-  },
+    likes: {
+      flexDirection: "row",
+      justifyContent: "center",
+    },
 
-  likesHeart: {
-    paddingHorizontal: 5,
-  },
+    likesHeart: {
+      paddingHorizontal: 5,
+    },
 
-  postedBy: {
-    paddingBottom: 5,
-  },
-});
+    postedBy: {
+      paddingBottom: 5,
+    },
+  });
