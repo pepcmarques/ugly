@@ -122,7 +122,7 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import { useRouter } from "expo-router";
 
-import UglyGlobal from "../src/components/UglyGlobal";
+import UglyGlobal from "./UglyGlobal";
 
 import store from "../src/store/store";
 

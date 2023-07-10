@@ -16,6 +16,8 @@ import { getAuthorizationString } from "../../src/services/hooks";
 
 import TweetItem from "./tweetItem";
 
+import { Redirect } from "expo-router";
+
 const apiUrl = Constants.expoConfig.apiUrl;
 
 const TweetList = () => {
@@ -39,7 +41,16 @@ const TweetList = () => {
         headers: headers,
       });
       const responseJson = await response.json();
-      console.log(responseJson);
+
+      // {"detail": "Could not validate credentials"}
+      if (responseJson.hasOwnProperty('detail')) {
+        if (responseJson.detail == "Could not validate credentials") {
+          console.log("Invalid Credentials");
+          <Redirect href="/auth/SignIn" />
+        }
+      }
+      
+      //console.log(responseJson);
       return responseJson;
     } catch (error) {
       console.error(error);

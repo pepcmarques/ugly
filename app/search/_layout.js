@@ -10,15 +10,8 @@ const StackLayout = () => {
     <Stack
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarStyle: {
-          display: ["[username]", "tweetComments", "tweetItem"].includes(route.name)
-            ? "none"
-            : "flex",
-        },
         })}
-    >
-      <Stack.Screen name="[username]" options={{ href:null }}/>
-    </Stack>
+    ></Stack>
   );
 };
 

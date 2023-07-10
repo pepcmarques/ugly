@@ -7,11 +7,13 @@ import {
   StyleSheet,
 } from "react-native";
 
-import { usePathname, useSearchParams } from "expo-router";
+import { Stack, usePathname, useSearchParams } from "expo-router";
 
 import { getAuthorizationString } from "../../src/services/hooks";
 
 import { useTheme } from "react-native-paper";
+
+import { Redirect } from "expo-router";
 
 import TweetComments from "./tweetComments";
 
@@ -43,6 +45,15 @@ const UserTweets = () => {
         headers: headers,
       });
       const responseJson = await response.json();
+
+      // {"detail": "Could not validate credentials"}
+      if (responseJson.hasOwnProperty("detail")) {
+        if (responseJson.detail == "Could not validate credentials") {
+          console.log("Invalid Credentials");
+          <Redirect href="/auth/SignIn" />;
+        }
+      }
+
       return responseJson;
     } catch (error) {
       console.error(error);
@@ -68,8 +79,10 @@ const UserTweets = () => {
       </View>
     );
   }
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Stack.Screen options={{ title: `${username}`, headerShown: true }} />
       <FlatList
         data={userTweets}
         keyExtractor={({ id }) => id}

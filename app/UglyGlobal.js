@@ -10,11 +10,11 @@ import {
 import { connect } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getFromSecureStore } from "../services/hooks.js";
+import { getFromSecureStore } from "../src/services/hooks.js";
 
-import SignIn from "../screens/SignIn";
-import SignOut from "../screens/SignOut";
-import { checkAuthenticationState } from "../store/actions";
+import SignIn from "./auth/SignIn";
+import SignOut from "./auth/SignOut";
+import { checkAuthenticationState } from "../src/store/actions";
 
 import { Link, Redirect } from "expo-router";
 

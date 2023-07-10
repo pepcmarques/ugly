@@ -10,12 +10,12 @@ import { useTheme } from "react-native-paper";
 
 import shortid from "shortid";
 
-import { saveToSecureStore } from "../services/hooks.js";
+import { saveToSecureStore } from "../../src/services/hooks.js";
 
 import { connect } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 
-import * as actions from "../store/actions";
+import * as actions from "../../src/store/actions";
 
 const SignIn = (props) => {
   const dispatch = useDispatch();
@@ -76,7 +76,8 @@ const SignIn = (props) => {
             mode="contained"
             onPress={() => {
               props.signin(username, password);
-            }}>
+            }}
+          >
             Sign In
           </PaperButton>
           <PaperButton
@@ -85,7 +86,8 @@ const SignIn = (props) => {
             mode="contained"
             onPress={() => {
               props.signin(username, password);
-            }}>
+            }}
+          >
             Register
           </PaperButton>
         </View>
@@ -130,5 +132,4 @@ const makeStyles = (colors: any) =>
       flexDirection: "row",
       justifyContent: "space-around",
     },
-
   });

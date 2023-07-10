@@ -5,7 +5,7 @@ import { useTheme } from "react-native-paper";
 
 import { connect } from "react-redux";
 
-import * as actions from '../store/actions';
+import * as actions from '../../src/store/actions';
 
 const makeStyles = (colors: any) =>
   StyleSheet.create({

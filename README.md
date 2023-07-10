@@ -23,5 +23,6 @@ https://expo.github.io/router/docs/migration/react-navigation/themes/
 
 ## expo-router
 
+https://www.youtube.com/watch?v=yyGS0adZdsU
 https://galaxies.dev/react-native-file-based-routing
 https://expo.github.io/router/docs/features/linking/
